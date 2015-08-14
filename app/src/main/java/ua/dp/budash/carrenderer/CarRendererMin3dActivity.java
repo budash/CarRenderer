@@ -24,7 +24,7 @@ public class CarRendererMin3dActivity extends RendererActivity {
         scene.lights().add(new Light());
 
         IParser parser = Parser.createParser(Parser.Type.MAX_3DS,
-                getResources(), getPackageName() + ":raw/car_body", false);
+                getResources(), getPackageName() + ":raw/camaro_mika", false);
         parser.parse();
 
         car = parser.getParsedObject();

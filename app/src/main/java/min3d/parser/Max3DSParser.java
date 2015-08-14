@@ -9,6 +9,9 @@ import min3d.Shared;
 import min3d.core.Object3dContainer;
 import min3d.vos.Number3d;
 import min3d.vos.Uv;
+import ua.dp.budash.carrenderer.Constants;
+import ua.dp.budash.carrenderer.Utils;
+
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.util.Log;
@@ -78,6 +81,11 @@ public class Max3DSParser extends AParser implements IParser {
 	private void readChunk(InputStream stream) throws IOException {
 		readHeader(stream);
 
+        final int tempDebugChunk = chunkID;
+
+        String chunk = Integer.toHexString(tempDebugChunk);
+        android.util.Log.d("rend_car", "chunk=" + chunk);
+
 		switch (chunkID) {
 		case MESH_BLOCK:
 			break;
@@ -109,9 +117,14 @@ public class Max3DSParser extends AParser implements IParser {
 			break;
 		case TEX_NAME:
 			currentMaterialKey = readString(stream);
+            final String debugMatName = currentMaterialKey;
+            android.util.Log.d("rend_car", "debugMatName=" + debugMatName);
 			break;
 		case TEX_FILENAME:
-			String fileName = readString(stream);
+			String temp = readString(stream);
+            String temp2 = Utils.getResourceFrom3ds(temp);
+            String fileName = temp2 == Utils.EMPTY_STR ? temp : temp2 ;
+
 			StringBuffer texture = new StringBuffer(packageID);
 			texture.append(":drawable/");
 
@@ -139,6 +152,7 @@ public class Max3DSParser extends AParser implements IParser {
 		case TEX_MAP:
 			break;
 		default:
+            final int skippedChunk = chunkID;
 			skipRead(stream);
 		}
 	}
