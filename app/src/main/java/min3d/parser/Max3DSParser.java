@@ -84,7 +84,6 @@ public class Max3DSParser extends AParser implements IParser {
         final int tempDebugChunk = chunkID;
 
         String chunk = Integer.toHexString(tempDebugChunk);
-        android.util.Log.d("rend_car", "chunk=" + chunk);
 
 		switch (chunkID) {
 		case MESH_BLOCK:
