@@ -50,7 +50,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                 i.setClass(this, CarRendererMin3dActivity.class);
                 break;
             case R.id.rajawali:
-
+                i.setClass(this, CarRendererRajawaliActivity.class);
                 break;
         }
         try{
